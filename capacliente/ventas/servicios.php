@@ -1,0 +1,4 @@
+<?php
+declare(strict_types=1);
+require_once __DIR__.'/../app/_modulo.php';
+moduloCrud('Servicios','servicios','controllers/ventas/servicio_controller.php',['nombre'=>'Servicio','precio_referencia'=>'Precio referencial','estado'=>'Estado'],'<input type="hidden" name="accion" value="guardar"><input type="hidden" name="id_servicio" value="0"><div class="form-grid"><label class="wide">Nombre<input name="nombre" required></label><label>Precio referencial<input name="precio_referencia" type="number" min="0" step="0.01" required></label><label>Estado<select name="estado"><option value="1">Activo</option><option value="0">Inactivo</option></select></label><label class="wide">Descripción<textarea name="descripcion"></textarea></label></div>','Catálogo de servicios y precios referenciales.', ['id'=>'id_servicio','grupo'=>'VENTAS']); ?>

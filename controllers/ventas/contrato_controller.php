@@ -1,0 +1,4 @@
+<?php
+declare(strict_types=1);
+require_once __DIR__.'/../core/ControllerHelper.php'; require_once __DIR__.'/../../capalogica/seguridad/PermisoService.php'; require_once __DIR__.'/../../capalogica/ventas/ContratoService.php';
+$in=ControllerHelper::input(); $a=$in['accion'] ?? 'listar'; if(!in_array($a,['listar','detalle','catalogos','clientes_buscar'],true)) ControllerHelper::exigirPostCsrf(); PermisoService::requiere('contratos',in_array($a,['listar','detalle','catalogos','clientes_buscar'],true)?'ver':($a==='anular'?'anular':'crear')); $s=new ContratoService(); $r=match($a){'listar'=>$s->listar(),'catalogos'=>$s->catalogos(),'clientes_buscar'=>$s->buscarClientes((string)($in['buscar']??'')),'detalle'=>$s->detalle((int)($in['id_contrato']??0)),'anular'=>$s->anular((int)($in['id_contrato']??0),(string)($in['motivo']??'')),default=>$s->guardar($in)}; ControllerHelper::responder($r,$r['exito']?200:422);

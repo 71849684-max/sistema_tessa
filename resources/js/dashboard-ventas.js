@@ -1,0 +1,17 @@
+'use strict';
+
+(()=>{
+    const root=document.querySelector('[data-sales-dashboard]');
+    if(!root)return;
+    const money=value=>new Intl.NumberFormat('es-PE',{style:'currency',currency:'PEN',minimumFractionDigits:2}).format(Number(value||0));
+    const text=(node,value)=>{node.textContent=value;};
+    const renderBarras=(target,rows,key,label,formatter=value=>value)=>{
+        target.textContent='';
+        const max=Math.max(...rows.map(row=>Number(row[key]||0)),1);
+        rows.forEach(row=>{const item=document.createElement('div');item.className='bar-row';const title=document.createElement('span');title.textContent=label(row);const rail=document.createElement('div');rail.className='bar-rail';const fill=document.createElement('i');fill.style.width=`${Math.max(4,Number(row[key]||0)/max*100)}%`;rail.append(fill);const value=document.createElement('strong');value.textContent=formatter(row[key]);item.append(title,rail,value);target.append(item);});
+    };
+    const renderPendientes=rows=>{const target=root.querySelector('[data-pendientes]');target.textContent='';rows.slice(0,6).forEach(row=>{const item=document.createElement('div');item.className='pending-item';const info=document.createElement('div');const name=document.createElement('strong');name.textContent=row.cliente||row.con_numero;const detail=document.createElement('span');detail.textContent=`${row.descripcion} · vence ${row.fecha_vencimiento}`;info.append(name,detail);const amount=document.createElement('b');amount.textContent=money(row.saldo);item.append(info,amount);target.append(item);});};
+    const empty=(selector,visible)=>root.querySelector(selector).hidden=!visible;
+    const cargar=async datos=>{try{const url=root.dataset.controller+'?'+new URLSearchParams(datos);const response=await fetch(url,{credentials:'same-origin',headers:{Accept:'application/json'}});const json=await response.json();if(!json.exito)throw new Error(json.mensaje);const data=json.datos;const summary=data.resumen||{};['cobrado','por_cobrar','contratos_activos'].forEach(key=>text(root.querySelector(`[data-kpi="${key}"]`),key==='contratos_activos'?String(summary[key]||0):money(summary[key])));text(root.querySelector('[data-kpi="efectividad"]'),`${Number(summary.efectividad||0).toFixed(1)}%`);root.querySelector('[data-kpi-progress]').style.width=`${Math.min(100,Number(summary.efectividad||0))}%`;const evolucion=data.evolucion||[];renderBarras(root.querySelector('[data-evolucion]'),evolucion,'cobrado',row=>row.fecha,money);text(root.querySelector('[data-evolucion-total]'),money(summary.cobrado));empty('[data-evolucion-empty]',evolucion.length===0);const embudo=data.embudo||[];renderBarras(root.querySelector('[data-embudo]'),embudo,'monto',row=>row.estado,money);empty('[data-embudo-empty]',embudo.length===0);const servicios=data.servicios||[];renderBarras(root.querySelector('[data-servicios]'),servicios,'contratado',row=>row.nombre,money);empty('[data-servicios-empty]',servicios.length===0);const pendientes=data.pendientes||[];renderPendientes(pendientes);empty('[data-pendientes-empty]',pendientes.length===0);}catch(error){root.querySelectorAll('.empty-state').forEach(node=>{node.hidden=false;node.textContent='No se pudo cargar la información del dashboard.';});}};
+    const form=root.querySelector('[data-dashboard-filters]');form.addEventListener('submit',event=>{event.preventDefault();cargar(Object.fromEntries(new FormData(form)));});cargar(Object.fromEntries(new FormData(form)));
+})();

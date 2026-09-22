@@ -1,0 +1,6 @@
+/capaconexion/datos.local.php
+/storage/vouchers/*
+!/storage/vouchers/.gitkeep
+/.idea/
+*.log
+
