@@ -29,6 +29,7 @@ function tessaIcono(string $codigo): string
         'cargos' => '<rect x="4" y="6" width="16" height="15" rx="2"/><path d="M9 6V4h6v2M4 12h16"/>',
         'usuarios' => '<circle cx="9" cy="8" r="3"/><path d="M3 20v-2a6 6 0 0 1 10-4m5 0v8m-4-4h8"/>',
         'auditoria' => '<path d="M12 3l8 4v5c0 5-3 8-8 10-5-2-8-5-8-10V7l8-4zm-3 9 2 2 4-4"/>',
+        'configuracion' => '<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.9 4.9l2.2 2.2M16.9 16.9l2.2 2.2M2 12h3M19 12h3M4.9 19.1l2.2-2.2M16.9 7.1l2.2-2.2"/>',
     ];
     $trazo = $trazos[$codigo] ?? '<circle cx="12" cy="12" r="8"/>';
     return '<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'.$trazo.'</svg>';

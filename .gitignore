@@ -1,6 +1,7 @@
 /capaconexion/datos.local.php
 /storage/vouchers/*
 !/storage/vouchers/.gitkeep
+/storage/plantillas/
 /.idea/
 *.log
-
+/vendor/

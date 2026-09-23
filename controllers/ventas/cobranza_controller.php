@@ -8,18 +8,20 @@ require_once __DIR__ . '/../../capalogica/seguridad/VoucherService.php';
 
 $in = ControllerHelper::input();
 $accion = $in['accion'] ?? 'listar';
-if (!in_array($accion, ['listar', 'hitos', 'contratos'], true)) {
+if (!in_array($accion, ['listar', 'hitos', 'contratos', 'participantes'], true)) {
     ControllerHelper::exigirPostCsrf();
 }
-PermisoService::requiere('cobranzas', in_array($accion, ['listar', 'hitos', 'contratos'], true) ? 'ver' : ($accion === 'anular' ? 'anular' : 'crear'));
+PermisoService::requiere('cobranzas', in_array($accion, ['listar', 'hitos', 'contratos', 'participantes'], true) ? 'ver' : ($accion === 'anular' ? 'anular' : 'crear'));
 $service = new CobranzaService();
 
 if ($accion === 'listar') {
     $respuesta = $service->listar($in);
 } elseif ($accion === 'contratos') {
-    $respuesta = $service->contratos();
+    $respuesta = $service->contratos((string)($in['buscar'] ?? ''));
 } elseif ($accion === 'hitos') {
     $respuesta = $service->hitos((int)($in['id_contrato'] ?? 0));
+} elseif ($accion === 'participantes') {
+    $respuesta = $service->participantesPago((int)($in['id_contrato'] ?? 0));
 } elseif ($accion === 'anular') {
     $respuesta = $service->anular((int)($in['id_cobranza'] ?? 0), (string)($in['motivo'] ?? ''));
 } else {

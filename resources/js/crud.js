@@ -44,6 +44,8 @@ if (typeof document !== 'undefined') (() => {
     const actionContainer = row => {
         const wrap = document.createElement('div'); wrap.className = 'row-actions';
         if (config.editar) wrap.append(createButton('Editar', 'editar', row));
+        if (config.word) wrap.append(createButton('Word', 'word', row));
+        if (config.voucher && row.id_hito) wrap.append(createButton('Voucher', 'voucher', row));
         if (config.anular && row.estado !== 'ANULADO') wrap.append(createButton('Anular', 'anular', row));
         return wrap;
     };
@@ -59,7 +61,7 @@ if (typeof document !== 'undefined') (() => {
             meta.append(dt, dd);
         }
         article.append(avatar, title, role, meta);
-        if (config.editar || config.anular) article.append(actionContainer(row));
+        if (config.editar || config.anular || config.word) article.append(actionContainer(row));
         return article;
     };
     let rowsById = new Map();
@@ -86,7 +88,7 @@ if (typeof document !== 'undefined') (() => {
                 else td.textContent = value;
                 tr.append(td);
             }
-            if (config.editar || config.anular) { const td = document.createElement('td'); td.append(actionContainer(row)); tr.append(td); }
+            if (config.editar || config.anular || config.word) { const td = document.createElement('td'); td.append(actionContainer(row)); tr.append(td); }
             return tr;
         });
         if (!paginator) paginator = new PaginadorTablas({ tabla: page.querySelector('table'), contenedor: page.querySelector('[data-table-host]'), pageSize: 10 });
@@ -130,6 +132,8 @@ if (typeof document !== 'undefined') (() => {
         const row = rowsById.get(button.dataset.rowId);
         if (!row) return;
         if (button.dataset.rowAction === 'editar' && config.editar) fillForm(row);
+        if (button.dataset.rowAction === 'word' && config.word) window.open(url + '?accion=docx&id_contrato=' + encodeURIComponent(button.dataset.rowId), '_blank', 'noopener');
+        if (button.dataset.rowAction === 'voucher' && config.voucher) window.open(window.TESSA_BASE + 'controllers/ventas/voucher_controller.php?id_cobranza=' + encodeURIComponent(button.dataset.rowId) + '&id_hito=' + encodeURIComponent(row.id_hito), '_blank', 'noopener');
         if (button.dataset.rowAction === 'anular' && config.anular) {
             const voidForm = voidDialog.querySelector('form'); voidForm.reset();
             voidForm.querySelector('[data-void-id]').value = String(row[config.id]);

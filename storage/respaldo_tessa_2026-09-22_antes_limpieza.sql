@@ -1,3 +1,8 @@
+-- MySQL dump 10.13  Distrib 8.4.3, for Win64 (x86_64)
+--
+-- Host: localhost    Database: tessa_control_pagos
+-- ------------------------------------------------------
+-- Server version	8.4.3
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -10,9 +15,10 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `tessa_control_pagos` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+--
+-- Table structure for table `auditoria`
+--
 
-USE `tessa_control_pagos`;
 DROP TABLE IF EXISTS `auditoria`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -29,14 +35,23 @@ CREATE TABLE `auditoria` (
   PRIMARY KEY (`id_auditoria`),
   KEY `ix_audit` (`created_at`),
   KEY `ix_entidad` (`entidad`,`id_registro`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auditoria`
+--
 
 LOCK TABLES `auditoria` WRITE;
 /*!40000 ALTER TABLE `auditoria` DISABLE KEYS */;
-INSERT INTO `auditoria` VALUES (1,'EDITAR',1,'empresa',1,'{\"ruc\": \"20614878275\", \"ciudad\": \"Huancayo\", \"eslogan\": \"Una institución de Ascientificos\", \"id_empresa\": 1, \"pie_correo\": null, \"updated_at\": \"2026-09-23 11:30:00\", \"medios_pago\": \"[{\\\"cci\\\": \\\"00235514021089109862\\\", \\\"medio\\\": \\\"BCP - Soles\\\", \\\"numero\\\": \\\"35540210891098\\\", \\\"titular\\\": \\\"BORIS SENIN CARHUALLANQUI PARIAN\\\"}, {\\\"cci\\\": \\\"00235514021089109862\\\", \\\"medio\\\": \\\"BCP - Soles\\\", \\\"numero\\\": \\\"35540210891098\\\", \\\"titular\\\": \\\"BORIS SENIN CARHUALLANQUI PARIAN\\\"}]\", \"razon_social\": \"ASCIENTIFICOS S.A.C.\", \"pie_direccion\": \"Jr. Guido N.° 726, Huancayo - Junín\", \"pie_telefonos\": \"+51 993 389 800 | +51 937 711 229 | +51 999 999 999\", \"domicilio_legal\": \"Jr. Guido N.° 726, Huancayo - Junín\", \"titulo_contrato\": \"PROGRAMA DE ACOMPAÑAMIENTO PARA TITULACIÓN POR TESIS\", \"representante_cargo\": \"Gerente\", \"representante_nombre\": \"BORIS SENIN CARHUALLANQUI PARIAN\", \"representante_documento\": \"71341527\"}','{\"ruc\": \"20614878275\", \"ciudad\": \"Huancayo\", \"eslogan\": \"Una institución de Ascientificos\", \"id_empresa\": 1, \"pie_correo\": null, \"updated_at\": \"2026-09-23 18:53:37\", \"medios_pago\": \"[{\\\"cci\\\": \\\"00235514021089109862\\\", \\\"medio\\\": \\\"BCP - Soles\\\", \\\"numero\\\": \\\"35540210891098\\\", \\\"titular\\\": \\\"BORIS SENIN CARHUALLANQUI PARIAN\\\"}]\", \"razon_social\": \"ASCIENTIFICOS S.A.C.\", \"pie_direccion\": \"Jr. Guido N.° 726, Huancayo - Junín\", \"pie_telefonos\": \"+51 993 389 800 | +51 937 711 229 | +51 999 999 999\", \"domicilio_legal\": \"Jr. Guido N.° 726, Huancayo - Junín\", \"titulo_contrato\": \"PROGRAMA DE ACOMPAÑAMIENTO PARA TITULACIÓN POR TESIS\", \"representante_cargo\": \"Gerente\", \"representante_nombre\": \"BORIS SENIN CARHUALLANQUI PARIAN\", \"representante_documento\": \"71341527\"}','127.0.0.1','2026-09-23 18:53:37');
+INSERT INTO `auditoria` VALUES (1,'LOGIN',1,'usuario',1,'[]','[]','127.0.0.1','2026-09-22 11:26:43'),(2,'GUARDAR',1,'servicio',1,'[]','{\"accion\": \"guardar\", \"estado\": \"1\", \"nombre\": \"Tesis\", \"descripcion\": \"\", \"precio_referencia\": \"5000\"}','127.0.0.1','2026-09-22 11:35:26'),(3,'LOGIN',1,'usuario',1,'[]','[]','127.0.0.1','2026-09-22 11:47:35'),(4,'LOGIN',1,'usuario',1,'[]','[]','127.0.0.1','2026-09-22 12:37:22'),(5,'LOGIN',1,'usuario',1,'[]','[]','127.0.0.1','2026-09-22 12:49:09'),(6,'LOGIN',1,'usuario',1,'[]','[]','127.0.0.1','2026-09-22 12:50:05'),(7,'GUARDAR',1,'personal',1,'[]','{\"dni\": \"00000001\", \"accion\": \"guardar\", \"correo\": \"admin@gmail.com\", \"estado\": \"1\", \"nombres\": \"Administrador\", \"id_cargo\": \"1\", \"telefono\": \"99999999\", \"apellidos\": \"Tessa\", \"id_personal\": \"1\"}','127.0.0.1','2026-09-22 14:49:59'),(8,'LOGIN',1,'usuario',1,'[]','[]','127.0.0.1','2026-09-22 14:50:13'),(9,'GUARDAR',1,'cargo',2,'[]','{\"accion\": \"guardar\", \"estado\": \"1\", \"nombre\": \"Gerente\", \"id_cargo\": \"0\"}','127.0.0.1','2026-09-22 15:27:16'),(10,'GUARDAR',1,'cliente',1,'[]','{\"tipo\": \"NATURAL\", \"accion\": \"guardar\", \"correo\": \"\", \"estado\": \"1\", \"nombres\": \"José Francisco\", \"telefono\": \"\", \"apellidos\": \"Gómez Samaniego\", \"direccion\": \"\", \"documento\": \"71849684\", \"id_cliente\": \"0\", \"razon_social\": \"\"}','127.0.0.1','2026-09-22 15:49:45'),(11,'CREAR',1,'contrato',1,'[]','{\"numero\": \"TES-2026-000001\"}','127.0.0.1','2026-09-22 15:51:55'),(12,'CREAR',1,'cobranza',1,'[]','{\"contrato\": 1}','127.0.0.1','2026-09-22 15:52:22'),(13,'CREAR',1,'egreso',1,'[]','{\"fecha\": \"2026-09-22\", \"monto\": \"100\", \"accion\": \"registrar\", \"concepto\": \"Materiales de Escritorio\"}','127.0.0.1','2026-09-22 16:07:12'),(14,'ANULAR',1,'egreso',1,'[]','{\"motivo\": \"pRUEBA\"}','127.0.0.1','2026-09-22 17:23:29');
 /*!40000 ALTER TABLE `auditoria` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `cargo`
+--
+
 DROP TABLE IF EXISTS `cargo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -51,11 +66,20 @@ CREATE TABLE `cargo` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Dumping data for table `cargo`
+--
+
 LOCK TABLES `cargo` WRITE;
 /*!40000 ALTER TABLE `cargo` DISABLE KEYS */;
-INSERT INTO `cargo` VALUES (1,'Administrador',1,'2026-09-22 11:26:13','2026-09-22 11:26:13');
+INSERT INTO `cargo` VALUES (1,'Administrador',1,'2026-09-22 11:26:13','2026-09-22 11:26:13'),(2,'Gerente',1,'2026-09-22 15:27:16','2026-09-22 15:27:16');
 /*!40000 ALTER TABLE `cargo` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `cargo_permiso`
+--
+
 DROP TABLE IF EXISTS `cargo_permiso`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -70,11 +94,20 @@ CREATE TABLE `cargo_permiso` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Dumping data for table `cargo_permiso`
+--
+
 LOCK TABLES `cargo_permiso` WRITE;
 /*!40000 ALTER TABLE `cargo_permiso` DISABLE KEYS */;
-INSERT INTO `cargo_permiso` VALUES (1,1,1),(1,2,1),(1,3,1),(1,4,1),(1,5,1),(1,6,1),(1,7,1),(1,8,1),(1,9,1),(1,10,1),(1,11,1),(1,12,1),(1,13,1),(1,14,1),(1,15,1),(1,16,1),(1,17,1),(1,18,1),(1,19,1),(1,20,1),(1,21,1),(1,22,1),(1,23,1),(1,24,1),(1,25,1),(1,26,1),(1,27,1),(1,28,1),(1,29,1),(1,30,1),(1,31,1),(1,32,1),(1,33,1),(1,34,1),(1,35,1),(1,36,1),(1,37,1),(1,38,1),(1,39,1),(1,40,1),(1,41,1),(1,42,1),(1,43,1),(1,44,1),(1,45,1),(1,64,1),(1,65,1),(1,66,1);
+INSERT INTO `cargo_permiso` VALUES (1,1,1),(1,2,1),(1,3,1),(1,4,1),(1,5,1),(1,6,1),(1,7,1),(1,8,1),(1,9,1),(1,10,1),(1,11,1),(1,12,1),(1,13,1),(1,14,1),(1,15,1),(1,16,1),(1,17,1),(1,18,1),(1,19,1),(1,20,1),(1,21,1),(1,22,1),(1,23,1),(1,24,1),(1,25,1),(1,26,1),(1,27,1),(1,28,1),(1,29,1),(1,30,1),(1,31,1),(1,32,1),(1,33,1),(1,34,1),(1,35,1),(1,36,1),(1,37,1),(1,38,1),(1,39,1),(1,40,1),(1,41,1),(1,42,1),(1,43,1),(1,44,1),(1,45,1),(1,64,1);
 /*!40000 ALTER TABLE `cargo_permiso` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `cliente`
+--
+
 DROP TABLE IF EXISTS `cliente`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -93,20 +126,29 @@ CREATE TABLE `cliente` (
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_cliente`),
   UNIQUE KEY `documento` (`documento`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cliente`
+--
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
+INSERT INTO `cliente` VALUES (1,'NATURAL','71849684','José Francisco','Gómez Samaniego',NULL,NULL,NULL,NULL,1,'2026-09-22 15:49:45','2026-09-22 15:49:45');
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `cobranza`
+--
+
 DROP TABLE IF EXISTS `cobranza`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `cobranza` (
   `id_cobranza` int unsigned NOT NULL AUTO_INCREMENT,
   `id_contrato` int unsigned NOT NULL,
-  `id_cliente_pagador` int unsigned DEFAULT NULL,
   `id_registrado_por` int unsigned NOT NULL,
   `fecha` datetime NOT NULL,
   `medio_pago` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -119,17 +161,25 @@ CREATE TABLE `cobranza` (
   KEY `id_contrato` (`id_contrato`),
   KEY `id_registrado_por` (`id_registrado_por`),
   KEY `ix_cobranza` (`fecha`,`estado`),
-  KEY `fk_cobranza_pagador` (`id_cliente_pagador`),
   CONSTRAINT `cobranza_ibfk_1` FOREIGN KEY (`id_contrato`) REFERENCES `contrato` (`id_contrato`),
-  CONSTRAINT `cobranza_ibfk_2` FOREIGN KEY (`id_registrado_por`) REFERENCES `personal` (`id_personal`),
-  CONSTRAINT `fk_cobranza_pagador` FOREIGN KEY (`id_cliente_pagador`) REFERENCES `cliente` (`id_cliente`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  CONSTRAINT `cobranza_ibfk_2` FOREIGN KEY (`id_registrado_por`) REFERENCES `personal` (`id_personal`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cobranza`
+--
 
 LOCK TABLES `cobranza` WRITE;
 /*!40000 ALTER TABLE `cobranza` DISABLE KEYS */;
+INSERT INTO `cobranza` VALUES (1,1,1,'2026-09-22 15:52:00','EFECTIVO',NULL,900.00,'REGISTRADO',NULL,'2026-09-22 15:52:22');
 /*!40000 ALTER TABLE `cobranza` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `cobranza_detalle`
+--
+
 DROP TABLE IF EXISTS `cobranza_detalle`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -144,10 +194,20 @@ CREATE TABLE `cobranza_detalle` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Dumping data for table `cobranza_detalle`
+--
+
 LOCK TABLES `cobranza_detalle` WRITE;
 /*!40000 ALTER TABLE `cobranza_detalle` DISABLE KEYS */;
+INSERT INTO `cobranza_detalle` VALUES (1,1,900.00);
 /*!40000 ALTER TABLE `cobranza_detalle` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `contrato`
+--
+
 DROP TABLE IF EXISTS `contrato`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -175,13 +235,23 @@ CREATE TABLE `contrato` (
   CONSTRAINT `contrato_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id_cliente`),
   CONSTRAINT `contrato_ibfk_2` FOREIGN KEY (`id_servicio`) REFERENCES `servicio` (`id_servicio`),
   CONSTRAINT `contrato_ibfk_3` FOREIGN KEY (`id_responsable`) REFERENCES `personal` (`id_personal`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `contrato`
+--
 
 LOCK TABLES `contrato` WRITE;
 /*!40000 ALTER TABLE `contrato` DISABLE KEYS */;
+INSERT INTO `contrato` VALUES (1,'TES-2026-000001',1,1,1,'INDIVIDUAL','2026-09-22',5000.00,500.00,4500.00,'ACTIVO',NULL,1,'2026-09-22 15:51:55','2026-09-22 15:51:55');
 /*!40000 ALTER TABLE `contrato` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `contrato_hito`
+--
+
 DROP TABLE IF EXISTS `contrato_hito`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -193,17 +263,27 @@ CREATE TABLE `contrato_hito` (
   `fecha_vencimiento` date NOT NULL,
   `monto` decimal(12,2) NOT NULL,
   `monto_pagado` decimal(12,2) NOT NULL DEFAULT '0.00',
-  `estado` enum('PENDIENTE','PARCIAL','PAGADO','VENCIDO','ANULADO','CANCELADO') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'PENDIENTE',
+  `estado` enum('PENDIENTE','PARCIAL','PAGADO','VENCIDO','ANULADO') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'PENDIENTE',
   PRIMARY KEY (`id_hito`),
   UNIQUE KEY `uq_hito` (`id_contrato`,`numero`),
   CONSTRAINT `contrato_hito_ibfk_1` FOREIGN KEY (`id_contrato`) REFERENCES `contrato` (`id_contrato`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `contrato_hito`
+--
 
 LOCK TABLES `contrato_hito` WRITE;
 /*!40000 ALTER TABLE `contrato_hito` DISABLE KEYS */;
+INSERT INTO `contrato_hito` VALUES (1,1,1,'Cuota 1','2026-09-22',900.00,900.00,'PAGADO'),(2,1,2,'Cuota 2','2026-10-22',900.00,0.00,'PENDIENTE'),(3,1,3,'Cuota 3','2026-11-22',900.00,0.00,'PENDIENTE'),(4,1,4,'Cuota 4','2026-12-22',900.00,0.00,'PENDIENTE'),(5,1,5,'Cuota 5','2027-01-22',900.00,0.00,'PENDIENTE');
 /*!40000 ALTER TABLE `contrato_hito` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `contrato_integrante`
+--
+
 DROP TABLE IF EXISTS `contrato_integrante`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -217,10 +297,19 @@ CREATE TABLE `contrato_integrante` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Dumping data for table `contrato_integrante`
+--
+
 LOCK TABLES `contrato_integrante` WRITE;
 /*!40000 ALTER TABLE `contrato_integrante` DISABLE KEYS */;
 /*!40000 ALTER TABLE `contrato_integrante` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `egreso`
+--
+
 DROP TABLE IF EXISTS `egreso`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -239,41 +328,23 @@ CREATE TABLE `egreso` (
   KEY `id_registrado_por` (`id_registrado_por`),
   KEY `ix_egreso` (`fecha`,`estado`),
   CONSTRAINT `egreso_ibfk_1` FOREIGN KEY (`id_registrado_por`) REFERENCES `personal` (`id_personal`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `egreso`
+--
 
 LOCK TABLES `egreso` WRITE;
 /*!40000 ALTER TABLE `egreso` DISABLE KEYS */;
+INSERT INTO `egreso` VALUES (1,'2026-09-22','GENERAL','','Materiales de Escritorio',100.00,1,'ANULADO','pRUEBA','2026-09-22 16:07:12');
 /*!40000 ALTER TABLE `egreso` ENABLE KEYS */;
 UNLOCK TABLES;
-DROP TABLE IF EXISTS `empresa`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `empresa` (
-  `id_empresa` tinyint unsigned NOT NULL,
-  `razon_social` varchar(180) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ruc` char(11) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `eslogan` varchar(180) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `representante_nombre` varchar(180) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `representante_cargo` varchar(80) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `representante_documento` char(8) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `domicilio_legal` varchar(220) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ciudad` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `pie_direccion` varchar(220) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `pie_telefonos` varchar(120) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `pie_correo` varchar(160) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `titulo_contrato` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `medios_pago` json DEFAULT NULL,
-  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id_empresa`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
-LOCK TABLES `empresa` WRITE;
-/*!40000 ALTER TABLE `empresa` DISABLE KEYS */;
-INSERT INTO `empresa` VALUES (1,'ASCIENTIFICOS S.A.C.','20614878275','Una institución de Ascientificos','BORIS SENIN CARHUALLANQUI PARIAN','Gerente','71341527','Jr. Guido N.° 726, Huancayo - Junín','Huancayo','Jr. Guido N.° 726, Huancayo - Junín','+51 993 389 800 | +51 937 711 229 | +51 999 999 999',NULL,'PROGRAMA DE ACOMPAÑAMIENTO PARA TITULACIÓN POR TESIS','[{\"cci\": \"00235514021089109862\", \"medio\": \"BCP - Soles\", \"numero\": \"35540210891098\", \"titular\": \"BORIS SENIN CARHUALLANQUI PARIAN\"}]','2026-09-23 18:53:37');
-/*!40000 ALTER TABLE `empresa` ENABLE KEYS */;
-UNLOCK TABLES;
+--
+-- Table structure for table `login_intento`
+--
+
 DROP TABLE IF EXISTS `login_intento`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -285,13 +356,23 @@ CREATE TABLE `login_intento` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_login`),
   KEY `ix_login` (`usuario`,`created_at`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `login_intento`
+--
 
 LOCK TABLES `login_intento` WRITE;
 /*!40000 ALTER TABLE `login_intento` DISABLE KEYS */;
+INSERT INTO `login_intento` VALUES (1,'admin',1,NULL,'2026-09-22 11:26:43'),(2,'admin',1,NULL,'2026-09-22 11:47:35'),(3,'admin',1,NULL,'2026-09-22 12:37:22'),(4,'admin',1,NULL,'2026-09-22 12:49:09'),(5,'admin',1,NULL,'2026-09-22 12:50:05'),(6,'admin',1,NULL,'2026-09-22 14:50:13');
 /*!40000 ALTER TABLE `login_intento` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `modulo`
+--
+
 DROP TABLE IF EXISTS `modulo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -301,14 +382,23 @@ CREATE TABLE `modulo` (
   `nombre` varchar(80) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id_modulo`),
   UNIQUE KEY `codigo` (`codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `modulo`
+--
 
 LOCK TABLES `modulo` WRITE;
 /*!40000 ALTER TABLE `modulo` DISABLE KEYS */;
-INSERT INTO `modulo` VALUES (1,'clientes','Clientes'),(2,'servicios','Servicios'),(3,'contratos','Contratos'),(4,'cobranzas','Cobranzas'),(5,'egresos','Egresos'),(6,'personal','Personal'),(7,'cargos','Cargos'),(8,'usuarios','Usuarios'),(9,'auditoria','Auditor├¡a'),(10,'dashboard','Dashboard de ventas'),(11,'configuracion','Configuración');
+INSERT INTO `modulo` VALUES (1,'clientes','Clientes'),(2,'servicios','Servicios'),(3,'contratos','Contratos'),(4,'cobranzas','Cobranzas'),(5,'egresos','Egresos'),(6,'personal','Personal'),(7,'cargos','Cargos'),(8,'usuarios','Usuarios'),(9,'auditoria','Auditor├¡a'),(10,'dashboard','Dashboard de ventas');
 /*!40000 ALTER TABLE `modulo` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `permiso`
+--
+
 DROP TABLE IF EXISTS `permiso`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -319,14 +409,23 @@ CREATE TABLE `permiso` (
   PRIMARY KEY (`id_permiso`),
   UNIQUE KEY `uq_permiso` (`id_modulo`,`accion`),
   CONSTRAINT `permiso_ibfk_1` FOREIGN KEY (`id_modulo`) REFERENCES `modulo` (`id_modulo`)
-) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `permiso`
+--
 
 LOCK TABLES `permiso` WRITE;
 /*!40000 ALTER TABLE `permiso` DISABLE KEYS */;
-INSERT INTO `permiso` VALUES (7,1,'ver'),(16,1,'crear'),(25,1,'editar'),(34,1,'anular'),(43,1,'administrar'),(2,2,'ver'),(11,2,'crear'),(20,2,'editar'),(29,2,'anular'),(38,2,'administrar'),(5,3,'ver'),(14,3,'crear'),(23,3,'editar'),(32,3,'anular'),(41,3,'administrar'),(6,4,'ver'),(15,4,'crear'),(24,4,'editar'),(33,4,'anular'),(42,4,'administrar'),(4,5,'ver'),(13,5,'crear'),(22,5,'editar'),(31,5,'anular'),(40,5,'administrar'),(3,6,'ver'),(12,6,'crear'),(21,6,'editar'),(30,6,'anular'),(39,6,'administrar'),(8,7,'ver'),(17,7,'crear'),(26,7,'editar'),(35,7,'anular'),(44,7,'administrar'),(1,8,'ver'),(10,8,'crear'),(19,8,'editar'),(28,8,'anular'),(37,8,'administrar'),(9,9,'ver'),(18,9,'crear'),(27,9,'editar'),(36,9,'anular'),(45,9,'administrar'),(64,10,'ver'),(65,11,'ver'),(66,11,'editar');
+INSERT INTO `permiso` VALUES (7,1,'ver'),(16,1,'crear'),(25,1,'editar'),(34,1,'anular'),(43,1,'administrar'),(2,2,'ver'),(11,2,'crear'),(20,2,'editar'),(29,2,'anular'),(38,2,'administrar'),(5,3,'ver'),(14,3,'crear'),(23,3,'editar'),(32,3,'anular'),(41,3,'administrar'),(6,4,'ver'),(15,4,'crear'),(24,4,'editar'),(33,4,'anular'),(42,4,'administrar'),(4,5,'ver'),(13,5,'crear'),(22,5,'editar'),(31,5,'anular'),(40,5,'administrar'),(3,6,'ver'),(12,6,'crear'),(21,6,'editar'),(30,6,'anular'),(39,6,'administrar'),(8,7,'ver'),(17,7,'crear'),(26,7,'editar'),(35,7,'anular'),(44,7,'administrar'),(1,8,'ver'),(10,8,'crear'),(19,8,'editar'),(28,8,'anular'),(37,8,'administrar'),(9,9,'ver'),(18,9,'crear'),(27,9,'editar'),(36,9,'anular'),(45,9,'administrar'),(64,10,'ver');
 /*!40000 ALTER TABLE `permiso` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `persona_permiso`
+--
+
 DROP TABLE IF EXISTS `persona_permiso`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -341,10 +440,19 @@ CREATE TABLE `persona_permiso` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Dumping data for table `persona_permiso`
+--
+
 LOCK TABLES `persona_permiso` WRITE;
 /*!40000 ALTER TABLE `persona_permiso` DISABLE KEYS */;
 /*!40000 ALTER TABLE `persona_permiso` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `personal`
+--
+
 DROP TABLE IF EXISTS `personal`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -366,11 +474,20 @@ CREATE TABLE `personal` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Dumping data for table `personal`
+--
+
 LOCK TABLES `personal` WRITE;
 /*!40000 ALTER TABLE `personal` DISABLE KEYS */;
 INSERT INTO `personal` VALUES (1,'00000001','Administrador','Tessa','admin@gmail.com','99999999',1,1,'2026-09-22 11:26:13','2026-09-22 14:49:59');
 /*!40000 ALTER TABLE `personal` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `servicio`
+--
+
 DROP TABLE IF EXISTS `servicio`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -384,13 +501,23 @@ CREATE TABLE `servicio` (
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_servicio`),
   UNIQUE KEY `nombre` (`nombre`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `servicio`
+--
 
 LOCK TABLES `servicio` WRITE;
 /*!40000 ALTER TABLE `servicio` DISABLE KEYS */;
+INSERT INTO `servicio` VALUES (1,'Tesis',NULL,5000.00,1,'2026-09-22 11:35:26','2026-09-22 11:35:26');
 /*!40000 ALTER TABLE `servicio` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `usuario`
+--
+
 DROP TABLE IF EXISTS `usuario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -412,11 +539,20 @@ CREATE TABLE `usuario` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Dumping data for table `usuario`
+--
+
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,1,'admin','$2y$10$po4vGMzkQR.D3NgyIn9TauPpj7b04bpakxwwCuy57Cf84qZNgb2dS',1,0,NULL,NULL,'2026-09-23 14:32:23','2026-09-22 11:26:13');
+INSERT INTO `usuario` VALUES (1,1,'admin','$2y$10$po4vGMzkQR.D3NgyIn9TauPpj7b04bpakxwwCuy57Cf84qZNgb2dS',1,0,NULL,NULL,'2026-09-22 14:50:13','2026-09-22 11:26:13');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `voucher`
+--
+
 DROP TABLE IF EXISTS `voucher`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -436,10 +572,18 @@ CREATE TABLE `voucher` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Dumping data for table `voucher`
+--
+
 LOCK TABLES `voucher` WRITE;
 /*!40000 ALTER TABLE `voucher` DISABLE KEYS */;
 /*!40000 ALTER TABLE `voucher` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping routines for database 'tessa_control_pagos'
+--
 /*!50003 DROP PROCEDURE IF EXISTS `sp_admin_inicializar` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -638,11 +782,7 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_cobranza_listar`(IN p_inicio VARCHAR(10),IN p_fin VARCHAR(10),IN p_estado VARCHAR(15))
-BEGIN
- SELECT c.*,co.con_numero,COALESCE(cl.razon_social,CONCAT_WS(' ',cl.nombres,cl.apellidos)) cliente_nombre,COALESCE(pg.razon_social,CONCAT_WS(' ',pg.nombres,pg.apellidos)) pagador_nombre,d.id_hito,d.monto_aplicado,h.numero cuota_numero,h.descripcion cuota_descripcion
- FROM cobranza c JOIN contrato co ON co.id_contrato=c.id_contrato JOIN cliente cl ON cl.id_cliente=co.id_cliente LEFT JOIN cliente pg ON pg.id_cliente=c.id_cliente_pagador LEFT JOIN cobranza_detalle d ON d.id_cobranza=c.id_cobranza LEFT JOIN contrato_hito h ON h.id_hito=d.id_hito
- WHERE(p_inicio='' OR DATE(c.fecha)>=p_inicio) AND(p_fin='' OR DATE(c.fecha)<=p_fin) AND(p_estado='' OR c.estado=p_estado) ORDER BY c.id_cobranza DESC,d.id_hito;
-END ;;
+BEGIN SELECT c.*,co.con_numero FROM cobranza c JOIN contrato co ON co.id_contrato=c.id_contrato WHERE(p_inicio='' OR DATE(c.fecha)>=p_inicio) AND(p_fin='' OR DATE(c.fecha)<=p_fin) AND(p_estado='' OR c.estado=p_estado) ORDER BY c.id_cobranza DESC; END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -658,110 +798,8 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_cobranza_registrar`(IN p_contrato INT UNSIGNED,IN p_personal INT UNSIGNED,IN p_fecha DATETIME,IN p_medio VARCHAR(60),IN p_operacion VARCHAR(100),IN p_pagador INT UNSIGNED,IN p_detalles JSON,IN p_voucher_nombre VARCHAR(80),IN p_voucher_mime VARCHAR(80),IN p_voucher_tamano INT,IN p_voucher_hash CHAR(64))
-BEGIN
- DECLARE v_i INT DEFAULT 0; DECLARE v_total DECIMAL(12,2) DEFAULT 0; DECLARE v_hito INT; DECLARE v_monto DECIMAL(12,2); DECLARE v_saldo DECIMAL(12,2); DECLARE v_cobranza INT; DECLARE v_tipo VARCHAR(12); DECLARE v_titular INT;
- DECLARE EXIT HANDLER FOR SQLEXCEPTION BEGIN ROLLBACK; RESIGNAL; END;
- START TRANSACTION;
- SELECT tipo,id_cliente INTO v_tipo,v_titular FROM contrato WHERE id_contrato=p_contrato AND estado='ACTIVO' FOR UPDATE;
- IF v_tipo IS NULL OR (v_tipo='INDIVIDUAL' AND p_pagador NOT IN(0,v_titular)) OR (v_tipo='GRUPAL' AND NOT(p_pagador=v_titular OR EXISTS(SELECT 1 FROM contrato_integrante WHERE id_contrato=p_contrato AND id_cliente=p_pagador))) THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='El pagador no pertenece al contrato.'; END IF;
- IF p_medio='EFECTIVO' THEN SET p_operacion=''; SET p_voucher_nombre=''; ELSEIF TRIM(p_operacion)='' OR TRIM(p_voucher_nombre)='' THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='Operación y voucher requeridos.'; END IF;
- WHILE v_i<JSON_LENGTH(p_detalles) DO
-  SET v_hito=CAST(JSON_UNQUOTE(JSON_EXTRACT(p_detalles,CONCAT('$[',v_i,'].id_hito'))) AS UNSIGNED); SET v_monto=CAST(JSON_UNQUOTE(JSON_EXTRACT(p_detalles,CONCAT('$[',v_i,'].monto'))) AS DECIMAL(12,2));
-  SELECT monto-monto_pagado INTO v_saldo FROM contrato_hito WHERE id_hito=v_hito AND id_contrato=p_contrato AND estado IN('PENDIENTE','PARCIAL') FOR UPDATE;
-  IF v_monto<=0 OR v_saldo IS NULL OR v_monto>v_saldo THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='El pago supera el saldo de una cuota.'; END IF;
-  SET v_total=v_total+v_monto; SET v_i=v_i+1;
- END WHILE;
- INSERT INTO cobranza(id_contrato,id_cliente_pagador,id_registrado_por,fecha,medio_pago,numero_operacion,monto_total) VALUES(p_contrato,IF(p_pagador=0,v_titular,p_pagador),p_personal,p_fecha,p_medio,NULLIF(p_operacion,''),v_total);
- SET v_cobranza=LAST_INSERT_ID(); SET v_i=0;
- WHILE v_i<JSON_LENGTH(p_detalles) DO
-  SET v_hito=CAST(JSON_UNQUOTE(JSON_EXTRACT(p_detalles,CONCAT('$[',v_i,'].id_hito'))) AS UNSIGNED); SET v_monto=CAST(JSON_UNQUOTE(JSON_EXTRACT(p_detalles,CONCAT('$[',v_i,'].monto'))) AS DECIMAL(12,2));
-  INSERT INTO cobranza_detalle VALUES(v_cobranza,v_hito,v_monto);
-  UPDATE contrato_hito SET monto_pagado=monto_pagado+v_monto,estado=IF(v_saldo-v_monto<=0,'PAGADO','PARCIAL') WHERE id_hito=v_hito;
-  SET v_i=v_i+1;
- END WHILE;
- IF p_voucher_nombre<>'' THEN INSERT INTO voucher(id_cobranza,nombre_interno,mime,tamano,hash_sha256) VALUES(v_cobranza,p_voucher_nombre,p_voucher_mime,p_voucher_tamano,p_voucher_hash); END IF;
- COMMIT;
- SELECT 1 resultado,'Cobranza registrada.' mensaje,v_cobranza id_cobranza;
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `sp_cobranza_voucher_datos` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_cobranza_voucher_datos`(IN p_cobranza INT UNSIGNED,IN p_hito INT UNSIGNED)
-BEGIN
-    SELECT c.id_cobranza,c.estado c_estado,c.fecha,c.medio_pago,co.con_numero,s.nombre servicio_nombre,
-           COALESCE(cl.razon_social,CONCAT_WS(' ',cl.nombres,cl.apellidos)) cliente_nombre,cl.documento,
-           h.numero cuota_numero,h.descripcion cuota_descripcion,d.monto_aplicado importe_pago,
-           GREATEST(0,h.monto-h.monto_pagado) saldo_resultante
-    FROM cobranza c JOIN contrato co ON co.id_contrato=c.id_contrato JOIN servicio s ON s.id_servicio=co.id_servicio
-    JOIN cliente cl ON cl.id_cliente=co.id_cliente JOIN cobranza_detalle d ON d.id_cobranza=c.id_cobranza
-    JOIN contrato_hito h ON h.id_hito=d.id_hito
-    WHERE c.id_cobranza=p_cobranza AND d.id_hito=p_hito LIMIT 1;
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `sp_contrato_actualizar` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_contrato_actualizar`(IN p_contrato INT UNSIGNED,IN p_cliente INT UNSIGNED,IN p_servicio INT UNSIGNED,IN p_responsable INT UNSIGNED,IN p_tipo VARCHAR(12),IN p_fecha DATE,IN p_bruto DECIMAL(12,2),IN p_descuento DECIMAL(12,2),IN p_hitos JSON,IN p_integrantes JSON)
-BEGIN
-    DECLARE v_estado VARCHAR(15) DEFAULT NULL;
-    DECLARE v_neto DECIMAL(12,2);
-    DECLARE v_total DECIMAL(12,2);
-    DECLARE v_hitos INT;
-    DECLARE v_integrantes INT;
-    DECLARE EXIT HANDLER FOR SQLEXCEPTION BEGIN ROLLBACK; RESIGNAL; END;
-    START TRANSACTION;
-    SELECT estado INTO v_estado FROM contrato WHERE id_contrato=p_contrato FOR UPDATE;
-    IF v_estado IS NULL OR v_estado='ANULADO' THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='Contrato no disponible para edición.'; END IF;
-    IF EXISTS(SELECT 1 FROM cobranza WHERE id_contrato=p_contrato) THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='El contrato tiene cobranzas; no se pueden modificar sus cuotas ni su total.'; END IF;
-    IF p_tipo NOT IN ('INDIVIDUAL','GRUPAL') OR p_bruto<=0 OR p_descuento<0 OR p_descuento>=p_bruto THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='Total o descuento inválidos.'; END IF;
-    SET v_neto=ROUND(p_bruto-p_descuento,2);
-    SELECT COUNT(*),COALESCE(SUM(j.monto),0) INTO v_hitos,v_total
-      FROM JSON_TABLE(p_hitos,'$[*]' COLUMNS(numero INT PATH '$.numero',descripcion VARCHAR(180) PATH '$.descripcion',fecha_vencimiento DATE PATH '$.fecha_vencimiento',monto DECIMAL(12,2) PATH '$.monto')) j;
-    IF v_hitos=0 OR ABS(v_total-v_neto)>0.001 THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='Las cuotas no coinciden con el total con descuento.'; END IF;
-    IF EXISTS(SELECT 1 FROM JSON_TABLE(p_hitos,'$[*]' COLUMNS(numero INT PATH '$.numero',descripcion VARCHAR(180) PATH '$.descripcion',fecha_vencimiento DATE PATH '$.fecha_vencimiento',monto DECIMAL(12,2) PATH '$.monto')) j WHERE j.numero<1 OR j.descripcion IS NULL OR TRIM(j.descripcion)='' OR j.fecha_vencimiento IS NULL OR j.monto<=0) THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='Hay cuotas incompletas.';
-    END IF;
-    IF p_tipo='GRUPAL' THEN
-        SELECT COUNT(DISTINCT j.id_cliente) INTO v_integrantes FROM JSON_TABLE(p_integrantes,'$[*]' COLUMNS(id_cliente INT PATH '$.id_cliente')) j WHERE j.id_cliente<>p_cliente;
-        IF v_integrantes<1 OR v_integrantes<>JSON_LENGTH(p_integrantes) OR EXISTS(SELECT 1 FROM JSON_TABLE(p_integrantes,'$[*]' COLUMNS(id_cliente INT PATH '$.id_cliente')) j LEFT JOIN cliente cl ON cl.id_cliente=j.id_cliente AND cl.estado=1 WHERE cl.id_cliente IS NULL) THEN
-            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='Los integrantes deben ser clientes activos distintos del titular.';
-        END IF;
-    END IF;
-    UPDATE contrato SET id_cliente=p_cliente,id_servicio=p_servicio,id_responsable=p_responsable,tipo=p_tipo,fecha=p_fecha,monto_bruto=p_bruto,descuento=p_descuento,monto_neto=v_neto WHERE id_contrato=p_contrato;
-    DELETE FROM contrato_integrante WHERE id_contrato=p_contrato;
-    IF p_tipo='GRUPAL' THEN
-        INSERT INTO contrato_integrante(id_contrato,id_cliente) SELECT p_contrato,j.id_cliente FROM JSON_TABLE(p_integrantes,'$[*]' COLUMNS(id_cliente INT PATH '$.id_cliente')) j;
-    END IF;
-    DELETE FROM contrato_hito WHERE id_contrato=p_contrato;
-    INSERT INTO contrato_hito(id_contrato,numero,descripcion,fecha_vencimiento,monto)
-      SELECT p_contrato,j.numero,j.descripcion,j.fecha_vencimiento,j.monto
-      FROM JSON_TABLE(p_hitos,'$[*]' COLUMNS(numero SMALLINT PATH '$.numero',descripcion VARCHAR(180) PATH '$.descripcion',fecha_vencimiento DATE PATH '$.fecha_vencimiento',monto DECIMAL(12,2) PATH '$.monto')) j;
-    COMMIT; SELECT 1 resultado,'Contrato actualizado.' mensaje,p_contrato id_contrato;
-END ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_cobranza_registrar`(IN p_contrato INT UNSIGNED,IN p_personal INT UNSIGNED,IN p_fecha DATETIME,IN p_medio VARCHAR(60),IN p_operacion VARCHAR(100),IN p_detalles JSON,IN p_voucher_nombre VARCHAR(80),IN p_voucher_mime VARCHAR(80),IN p_voucher_tamano INT,IN p_voucher_hash CHAR(64))
+BEGIN DECLARE v_i INT DEFAULT 0; DECLARE v_total DECIMAL(12,2) DEFAULT 0; DECLARE v_hito INT UNSIGNED; DECLARE v_monto DECIMAL(12,2); DECLARE v_saldo DECIMAL(12,2); DECLARE v_cobranza INT UNSIGNED; DECLARE EXIT HANDLER FOR SQLEXCEPTION BEGIN ROLLBACK; RESIGNAL; END; IF JSON_LENGTH(p_detalles)=0 THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='Debe aplicar el pago a una cuota.'; END IF; START TRANSACTION; WHILE v_i<JSON_LENGTH(p_detalles) DO SET v_hito=CAST(JSON_UNQUOTE(JSON_EXTRACT(p_detalles,CONCAT('$[',v_i,'].id_hito'))) AS UNSIGNED); SET v_monto=CAST(JSON_UNQUOTE(JSON_EXTRACT(p_detalles,CONCAT('$[',v_i,'].monto'))) AS DECIMAL(12,2)); SELECT monto-monto_pagado INTO v_saldo FROM contrato_hito WHERE id_hito=v_hito AND id_contrato=p_contrato AND estado IN('PENDIENTE','PARCIAL') FOR UPDATE; IF v_monto<=0 OR v_saldo IS NULL OR v_monto>v_saldo THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='El pago supera el saldo de una cuota.'; END IF; SET v_total=v_total+v_monto; SET v_i=v_i+1; END WHILE; INSERT INTO cobranza(id_contrato,id_registrado_por,fecha,medio_pago,numero_operacion,monto_total) VALUES(p_contrato,p_personal,p_fecha,p_medio,NULLIF(p_operacion,''),v_total); SET v_cobranza=LAST_INSERT_ID(); SET v_i=0; WHILE v_i<JSON_LENGTH(p_detalles) DO SET v_hito=CAST(JSON_UNQUOTE(JSON_EXTRACT(p_detalles,CONCAT('$[',v_i,'].id_hito'))) AS UNSIGNED); SET v_monto=CAST(JSON_UNQUOTE(JSON_EXTRACT(p_detalles,CONCAT('$[',v_i,'].monto'))) AS DECIMAL(12,2)); INSERT INTO cobranza_detalle VALUES(v_cobranza,v_hito,v_monto); UPDATE contrato_hito SET monto_pagado=monto_pagado+v_monto,estado=IF(monto_pagado+v_monto>=monto,'PAGADO','PARCIAL') WHERE id_hito=v_hito; SET v_i=v_i+1; END WHILE; IF p_voucher_nombre<>'' THEN INSERT INTO voucher(id_cobranza,nombre_interno,mime,tamano,hash_sha256) VALUES(v_cobranza,p_voucher_nombre,p_voucher_mime,p_voucher_tamano,p_voucher_hash); END IF; IF NOT EXISTS(SELECT 1 FROM contrato_hito WHERE id_contrato=p_contrato AND estado IN('PENDIENTE','PARCIAL','VENCIDO')) THEN UPDATE contrato SET estado='FINALIZADO' WHERE id_contrato=p_contrato; END IF; COMMIT; SELECT 1 resultado,'Cobranza registrada.' mensaje,v_cobranza id_cobranza; END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -778,36 +816,7 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_contrato_anular`(IN p_contrato INT UNSIGNED,IN p_motivo VARCHAR(500))
-BEGIN
- IF CHAR_LENGTH(TRIM(p_motivo))=0 THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='El motivo de anulación es obligatorio.'; END IF;
- UPDATE contrato SET estado='ANULADO',motivo_anulacion=p_motivo WHERE id_contrato=p_contrato AND estado<>'ANULADO';
- IF ROW_COUNT()=0 THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='Contrato no disponible para anulación.'; END IF;
- UPDATE contrato_hito SET estado='CANCELADO' WHERE id_contrato=p_contrato AND monto_pagado=0;
- SELECT 1 resultado,'Contrato anulado; los cobros registrados se conservan.' mensaje;
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `sp_contrato_buscar_activos` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_contrato_buscar_activos`(IN p_consulta VARCHAR(100))
-BEGIN
-    SELECT c.id_contrato,c.con_numero,COALESCE(cl.razon_social,CONCAT_WS(' ',cl.nombres,cl.apellidos)) cliente_nombre,cl.documento,
-           COALESCE(SUM(h.monto-h.monto_pagado),0) saldo
-    FROM contrato c JOIN cliente cl ON cl.id_cliente=c.id_cliente JOIN contrato_hito h ON h.id_contrato=c.id_contrato AND h.estado IN('PENDIENTE','PARCIAL','VENCIDO')
-    WHERE c.estado<>'ANULADO' AND (c.con_numero LIKE CONCAT('%',p_consulta,'%') OR cl.documento LIKE CONCAT('%',p_consulta,'%') OR cl.nombres LIKE CONCAT('%',p_consulta,'%') OR cl.apellidos LIKE CONCAT('%',p_consulta,'%') OR cl.razon_social LIKE CONCAT('%',p_consulta,'%'))
-    GROUP BY c.id_contrato HAVING saldo>0 ORDER BY c.id_contrato DESC LIMIT 30;
-END ;;
+BEGIN IF CHAR_LENGTH(TRIM(p_motivo))=0 THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='El motivo de anulación es obligatorio.'; END IF; IF EXISTS(SELECT 1 FROM cobranza WHERE id_contrato=p_contrato AND estado='REGISTRADO') THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='No puede anular un contrato con cobranzas activas.'; END IF; UPDATE contrato SET estado='ANULADO',motivo_anulacion=p_motivo WHERE id_contrato=p_contrato AND estado<>'ANULADO'; IF ROW_COUNT()=0 THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='Contrato no disponible para anulación.'; END IF; UPDATE contrato_hito SET estado='ANULADO' WHERE id_contrato=p_contrato; SELECT 1 resultado,'Contrato anulado.' mensaje; END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -842,31 +851,6 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_contrato_detalle`(IN p_contrato INT UNSIGNED)
 BEGIN SELECT * FROM contrato WHERE id_contrato=p_contrato; SELECT * FROM contrato_hito WHERE id_contrato=p_contrato ORDER BY numero; SELECT cl.* FROM contrato_integrante ci JOIN cliente cl ON cl.id_cliente=ci.id_cliente WHERE ci.id_contrato=p_contrato; END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `sp_contrato_edicion` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_contrato_edicion`(IN p_contrato INT UNSIGNED)
-BEGIN
-    SELECT c.*, cl.documento, cl.nombres, cl.apellidos, cl.razon_social, cl.direccion, cl.correo,
-           COALESCE(cl.razon_social, CONCAT_WS(' ', cl.nombres, cl.apellidos)) cliente_label,
-           s.nombre servicio_nombre,
-           COALESCE((SELECT JSON_ARRAYAGG(JSON_OBJECT('id_hito',h.id_hito,'numero',h.numero,'descripcion',h.descripcion,'fecha_vencimiento',h.fecha_vencimiento,'monto',h.monto,'monto_pagado',h.monto_pagado,'estado',h.estado)) FROM contrato_hito h WHERE h.id_contrato=c.id_contrato AND h.estado<>'ANULADO'),'[]') hitos,
-           COALESCE((SELECT JSON_ARRAYAGG(JSON_OBJECT('id_cliente',i.id_cliente,'documento',x.documento,'nombres',x.nombres,'apellidos',x.apellidos,'razon_social',x.razon_social,'direccion',x.direccion)) FROM contrato_integrante i JOIN cliente x ON x.id_cliente=i.id_cliente WHERE i.id_contrato=c.id_contrato),'[]') integrantes
-    FROM contrato c JOIN cliente cl ON cl.id_cliente=c.id_cliente JOIN servicio s ON s.id_servicio=c.id_servicio
-    WHERE c.id_contrato=p_contrato LIMIT 1;
-END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -939,32 +923,7 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_contrato_listar`()
-BEGIN
- SELECT c.*,COALESCE(SUM(h.monto-h.monto_pagado),0) saldo,COALESCE(cl.razon_social,CONCAT_WS(' ',cl.nombres,cl.apellidos)) cliente_nombre,s.nombre servicio_nombre,
- CONCAT(COALESCE(cl.razon_social,CONCAT_WS(' ',cl.nombres,cl.apellidos)),IF(c.tipo='GRUPAL',CONCAT(' + ',(SELECT COUNT(*) FROM contrato_integrante i WHERE i.id_contrato=c.id_contrato),' integrante(s)'),'')) involucrados
- FROM contrato c JOIN cliente cl ON cl.id_cliente=c.id_cliente JOIN servicio s ON s.id_servicio=c.id_servicio LEFT JOIN contrato_hito h ON h.id_contrato=c.id_contrato AND h.estado NOT IN('ANULADO','CANCELADO') GROUP BY c.id_contrato ORDER BY c.id_contrato DESC;
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `sp_contrato_participantes_pago` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = cp850 */ ;
-/*!50003 SET character_set_results = cp850 */ ;
-/*!50003 SET collation_connection  = cp850_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_contrato_participantes_pago`(IN p_contrato INT UNSIGNED)
-BEGIN
- SELECT c.tipo, JSON_ARRAYAGG(JSON_OBJECT('id_cliente',x.id_cliente,'etiqueta',CONCAT(IF(x.id_cliente=c.id_cliente,'Titular: ','Integrante: '),COALESCE(x.razon_social,CONCAT_WS(' ',x.nombres,x.apellidos)),' · ',x.documento))) participantes
- FROM contrato c JOIN cliente x ON x.id_cliente=c.id_cliente OR EXISTS(SELECT 1 FROM contrato_integrante i WHERE i.id_contrato=c.id_contrato AND i.id_cliente=x.id_cliente)
- WHERE c.id_contrato=p_contrato AND c.estado='ACTIVO' AND x.estado=1 GROUP BY c.id_contrato;
-END ;;
+BEGIN SELECT c.*,COALESCE(SUM(h.monto-h.monto_pagado),0) saldo,COALESCE(cl.razon_social,CONCAT_WS(' ',cl.nombres,cl.apellidos)) cliente_nombre,s.nombre servicio_nombre FROM contrato c JOIN cliente cl ON cl.id_cliente=c.id_cliente JOIN servicio s ON s.id_servicio=c.id_servicio LEFT JOIN contrato_hito h ON h.id_contrato=c.id_contrato AND h.estado<>'ANULADO' GROUP BY c.id_contrato ORDER BY c.id_contrato DESC; END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -998,12 +957,7 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_dashboard_ventas_evolucion`(IN p_desde DATE,IN p_hasta DATE)
-BEGIN
- WITH RECURSIVE fechas AS (SELECT p_desde fecha UNION ALL SELECT DATE_ADD(fecha,INTERVAL 1 DAY) FROM fechas WHERE fecha<p_hasta),
- proy AS (SELECT h.fecha_vencimiento fecha,SUM(h.monto) proyectado FROM contrato_hito h JOIN contrato c ON c.id_contrato=h.id_contrato WHERE c.estado IN('ACTIVO','FINALIZADO') AND h.estado<>'CANCELADO' AND h.fecha_vencimiento BETWEEN p_desde AND p_hasta GROUP BY h.fecha_vencimiento),
- cob AS (SELECT DATE(fecha) fecha,SUM(monto_total) cobrado FROM cobranza WHERE estado='REGISTRADO' AND DATE(fecha) BETWEEN p_desde AND p_hasta GROUP BY DATE(fecha))
- SELECT f.fecha,COALESCE(p.proyectado,0) proyectado,COALESCE(c.cobrado,0) cobrado FROM fechas f LEFT JOIN proy p ON p.fecha=f.fecha LEFT JOIN cob c ON c.fecha=f.fecha ORDER BY f.fecha;
-END ;;
+BEGIN SELECT DATE(fecha) fecha,COALESCE(SUM(monto_total),0) cobrado FROM cobranza WHERE estado='REGISTRADO' AND DATE(fecha) BETWEEN p_desde AND p_hasta GROUP BY DATE(fecha) ORDER BY fecha; END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -1037,33 +991,7 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_dashboard_ventas_resumen`(IN p_desde DATE,IN p_hasta DATE)
-BEGIN
-    DECLARE v_cobrado DECIMAL(12,2) DEFAULT 0;
-    DECLARE v_egresos DECIMAL(12,2) DEFAULT 0;
-    DECLARE v_proyectado DECIMAL(12,2) DEFAULT 0;
-    DECLARE v_pendiente DECIMAL(12,2) DEFAULT 0;
-    DECLARE v_vencido DECIMAL(12,2) DEFAULT 0;
-    DECLARE v_activos INT DEFAULT 0;
-
-    SELECT COALESCE(SUM(monto_total),0) INTO v_cobrado
-    FROM cobranza WHERE estado='REGISTRADO' AND DATE(fecha) BETWEEN p_desde AND p_hasta;
-    SELECT COALESCE(SUM(monto),0) INTO v_egresos
-    FROM egreso WHERE estado='REGISTRADO' AND fecha BETWEEN p_desde AND p_hasta;
-    SELECT COALESCE(SUM(h.monto),0) INTO v_proyectado
-    FROM contrato_hito h JOIN contrato c ON c.id_contrato=h.id_contrato
-    WHERE c.estado='ACTIVO' AND h.estado NOT IN('ANULADO','CANCELADO') AND h.fecha_vencimiento BETWEEN p_desde AND p_hasta;
-    SELECT COALESCE(SUM(h.monto-h.monto_pagado),0) INTO v_pendiente
-    FROM contrato_hito h JOIN contrato c ON c.id_contrato=h.id_contrato
-    WHERE c.estado='ACTIVO' AND h.estado IN('PENDIENTE','PARCIAL','VENCIDO');
-    SELECT COALESCE(SUM(h.monto-h.monto_pagado),0) INTO v_vencido
-    FROM contrato_hito h JOIN contrato c ON c.id_contrato=h.id_contrato
-    WHERE c.estado='ACTIVO' AND h.estado IN('PENDIENTE','PARCIAL','VENCIDO') AND h.fecha_vencimiento<CURDATE();
-    SELECT COUNT(*) INTO v_activos FROM contrato WHERE estado='ACTIVO';
-
-    SELECT v_cobrado cobrado,v_egresos egresos,(v_cobrado-v_egresos) neto,v_proyectado proyectado,
-           v_pendiente por_cobrar,v_vencido vencido,v_activos contratos_activos,
-           ROUND(IF(v_proyectado>0,v_cobrado/v_proyectado*100,0),2) efectividad;
-END ;;
+BEGIN DECLARE v_cobrado DECIMAL(12,2) DEFAULT 0; DECLARE v_pendiente DECIMAL(12,2) DEFAULT 0; DECLARE v_activos INT DEFAULT 0; SELECT COALESCE(SUM(monto_total),0) INTO v_cobrado FROM cobranza WHERE estado='REGISTRADO' AND DATE(fecha) BETWEEN p_desde AND p_hasta; SELECT COALESCE(SUM(h.monto-h.monto_pagado),0) INTO v_pendiente FROM contrato_hito h JOIN contrato c ON c.id_contrato=h.id_contrato WHERE c.estado IN('ACTIVO','FINALIZADO') AND h.estado IN('PENDIENTE','PARCIAL','VENCIDO'); SELECT COUNT(*) INTO v_activos FROM contrato WHERE estado='ACTIVO'; SELECT v_cobrado cobrado,v_pendiente por_cobrar,v_activos contratos_activos,ROUND(IFNULL(v_cobrado/NULLIF(v_cobrado+v_pendiente,0)*100,0),2) efectividad; END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -1132,40 +1060,6 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_egreso_registrar`(IN p_fecha DATE,IN p_categoria VARCHAR(100),IN p_beneficiario VARCHAR(160),IN p_concepto VARCHAR(500),IN p_monto DECIMAL(12,2),IN p_personal INT UNSIGNED)
 BEGIN INSERT INTO egreso(fecha,categoria,beneficiario,concepto,monto,id_registrado_por) VALUES(p_fecha,p_categoria,p_beneficiario,p_concepto,p_monto,p_personal); SELECT 1 resultado,'Egreso registrado.' mensaje,LAST_INSERT_ID() id_egreso; END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `sp_empresa_guardar` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = cp850 */ ;
-/*!50003 SET character_set_results = cp850 */ ;
-/*!50003 SET collation_connection  = cp850_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_empresa_guardar`(IN p_razon_social VARCHAR(180),IN p_ruc CHAR(11),IN p_eslogan VARCHAR(180),IN p_representante_nombre VARCHAR(180),IN p_representante_cargo VARCHAR(80),IN p_representante_documento CHAR(8),IN p_domicilio_legal VARCHAR(220),IN p_ciudad VARCHAR(100),IN p_pie_direccion VARCHAR(220),IN p_pie_telefonos VARCHAR(120),IN p_pie_correo VARCHAR(160),IN p_titulo_contrato VARCHAR(255),IN p_medios_pago JSON)
-BEGIN IF CHAR_LENGTH(TRIM(p_razon_social))=0 THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='La razón social es obligatoria.'; END IF; IF p_ruc<>'' AND CHAR_LENGTH(p_ruc)<>11 THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='El RUC debe tener 11 dígitos.'; END IF; IF p_representante_documento<>'' AND CHAR_LENGTH(p_representante_documento)<>8 THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='El DNI debe tener 8 dígitos.'; END IF; INSERT INTO empresa(id_empresa,razon_social,ruc,eslogan,representante_nombre,representante_cargo,representante_documento,domicilio_legal,ciudad,pie_direccion,pie_telefonos,pie_correo,titulo_contrato,medios_pago) VALUES(1,TRIM(p_razon_social),NULLIF(TRIM(p_ruc),''),NULLIF(TRIM(p_eslogan),''),NULLIF(TRIM(p_representante_nombre),''),NULLIF(TRIM(p_representante_cargo),''),NULLIF(TRIM(p_representante_documento),''),NULLIF(TRIM(p_domicilio_legal),''),NULLIF(TRIM(p_ciudad),''),NULLIF(TRIM(p_pie_direccion),''),NULLIF(TRIM(p_pie_telefonos),''),NULLIF(TRIM(p_pie_correo),''),NULLIF(TRIM(p_titulo_contrato),''),COALESCE(p_medios_pago,JSON_ARRAY())) ON DUPLICATE KEY UPDATE razon_social=VALUES(razon_social),ruc=VALUES(ruc),eslogan=VALUES(eslogan),representante_nombre=VALUES(representante_nombre),representante_cargo=VALUES(representante_cargo),representante_documento=VALUES(representante_documento),domicilio_legal=VALUES(domicilio_legal),ciudad=VALUES(ciudad),pie_direccion=VALUES(pie_direccion),pie_telefonos=VALUES(pie_telefonos),pie_correo=VALUES(pie_correo),titulo_contrato=VALUES(titulo_contrato),medios_pago=VALUES(medios_pago); SELECT 1 resultado,'Configuración de la empresa guardada.' mensaje; END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `sp_empresa_obtener` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_empresa_obtener`()
-BEGIN SELECT * FROM empresa WHERE id_empresa=1; END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -1436,3 +1330,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+-- Dump completed on 2026-09-22 17:23:59

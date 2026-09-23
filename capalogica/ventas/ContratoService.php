@@ -5,6 +5,8 @@ require_once __DIR__ . '/../core/BaseService.php';
 require_once __DIR__ . '/../seguridad/AuditoriaService.php';
 require_once __DIR__ . '/ClienteService.php';
 require_once __DIR__ . '/ServicioService.php';
+require_once __DIR__ . '/../documentos/DocxService.php';
+require_once __DIR__ . '/../core/EmpresaService.php';
 
 final class ContratoService extends BaseService
 {
@@ -32,7 +34,14 @@ final class ContratoService extends BaseService
     public function detalle(int $idContrato): array
     {
         if ($idContrato < 1) return $this->error('Contrato inválido.', ['id_contrato' => 'Requerido.']);
-        try { return $this->ok('Contrato obtenido.', $this->call('CALL sp_contrato_detalle(?)', 'i', [$idContrato])); }
+        try {
+            $fila = $this->fila($this->call('CALL sp_contrato_edicion(?)', 'i', [$idContrato]));
+            if ($fila === []) return $this->error('Contrato no encontrado.');
+            foreach (['hitos', 'integrantes'] as $campo) {
+                $fila[$campo] = json_decode((string)($fila[$campo] ?? '[]'), true) ?: [];
+            }
+            return $this->ok('Contrato obtenido.', $fila);
+        }
         catch (Throwable $e) { return $this->error('No se pudo obtener contrato.'); }
     }
 
@@ -57,6 +66,7 @@ final class ContratoService extends BaseService
                 if ($id < 1 || $id === $cliente) return $this->error('Integrante inválido.', ['integrantes' => 'Seleccione clientes distintos del titular.']);
                 $idsIntegrantes[$id] = $id;
             }
+
             if ($idsIntegrantes === []) return $this->error('Contrato grupal incompleto.', ['integrantes' => 'Agregue al menos un integrante.']);
         }
         $neto = round($bruto - $descuento, 2);
@@ -105,6 +115,61 @@ final class ContratoService extends BaseService
             error_log('ContratoService hito: ' . $e->getMessage());
             return $this->error('No se pudo guardar el cronograma.');
         }
+    }
+
+    public function actualizar(array $datos): array
+    {
+        $id = (int)($datos['id_contrato'] ?? 0);
+        $cliente = (int)($datos['id_cliente'] ?? 0);
+        $servicio = (int)($datos['id_servicio'] ?? 0);
+        $responsable = (int)($datos['id_responsable'] ?? 0);
+        $tipo = strtoupper(trim((string)($datos['tipo'] ?? '')));
+        $bruto = round((float)($datos['bruto'] ?? 0), 2);
+        $descuento = round((float)($datos['descuento'] ?? 0), 2);
+        $hitos = is_string($datos['hitos'] ?? null) ? json_decode((string)$datos['hitos'], true) : ($datos['hitos'] ?? []);
+        $integrantes = is_string($datos['integrantes'] ?? null) ? json_decode((string)$datos['integrantes'], true) : ($datos['integrantes'] ?? []);
+        if ($id < 1 || $cliente < 1 || $servicio < 1 || $responsable < 1 || !in_array($tipo, ['INDIVIDUAL', 'GRUPAL'], true) || !is_array($hitos) || !is_array($integrantes)) return $this->error('Datos del contrato inválidos.');
+        if ($bruto <= 0 || $descuento < 0 || $descuento > $bruto || $hitos === []) return $this->error('Montos o cuotas inválidos.');
+        $suma = 0.0;
+        foreach ($hitos as $hito) {
+            if ((float)($hito['monto'] ?? 0) <= 0 || !preg_match('/^\d{4}-\d{2}-\d{2}$/', (string)($hito['fecha_vencimiento'] ?? ''))) return $this->error('Cada cuota requiere fecha y monto positivo.');
+            $suma += round((float)$hito['monto'], 2);
+        }
+        if (abs(round($bruto - $descuento, 2) - round($suma, 2)) > 0.001) return $this->error('Las cuotas no coinciden con el monto neto.');
+        $ids = [];
+        foreach ($integrantes as $integrante) {
+            $integranteId = (int)(is_array($integrante) ? ($integrante['id_cliente'] ?? 0) : $integrante);
+            if ($tipo === 'GRUPAL' && ($integranteId < 1 || $integranteId === $cliente)) return $this->error('Los integrantes deben ser clientes distintos del titular.');
+            if ($integranteId > 0) $ids[$integranteId] = true;
+        }
+        if ($tipo === 'GRUPAL' && $ids === []) return $this->error('El contrato grupal requiere al menos un integrante.');
+        try {
+            $antes = $this->fila($this->call('CALL sp_contrato_edicion(?)', 'i', [$id]));
+            $fila = $this->fila($this->call('CALL sp_contrato_actualizar(?,?,?,?,?,?,?,?,?,?)', 'iiiissddss', [
+                $id, (int)($datos['id_cliente'] ?? 0), (int)($datos['id_servicio'] ?? 0),
+                (int)($datos['id_responsable'] ?? 0), (string)($datos['tipo'] ?? 'INDIVIDUAL'),
+                (string)($datos['fecha'] ?? ''), (float)($datos['bruto'] ?? 0), (float)($datos['descuento'] ?? 0),
+                json_encode($hitos, JSON_UNESCAPED_UNICODE), json_encode($integrantes, JSON_UNESCAPED_UNICODE)
+            ]));
+            (new AuditoriaService($this->db))->registrar('EDITAR', 'contrato', $id, $antes, $fila);
+            return $this->ok((string)($fila['mensaje'] ?? 'Contrato actualizado.'), $fila);
+        } catch (Throwable $e) {
+            error_log('ContratoService actualizar: ' . $e->getMessage());
+            return $this->error('No se pudo actualizar el contrato. Las cuotas pagadas y sus pagos no se modifican.');
+        }
+    }
+
+    public function descargarDocx(int $idContrato): never
+    {
+        $detalle = $this->detalle($idContrato);
+        if (!$detalle['exito'] || !is_array($detalle['datos'])) { http_response_code(404); echo 'Contrato no encontrado.'; exit; }
+        $empresa = (new EmpresaService($this->db))->obtener();
+        $docx = (new DocxService())->contrato($detalle['datos'], is_array($empresa['datos'] ?? null) ? $empresa['datos'] : []);
+        header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+        header('Content-Disposition: attachment; filename="' . $docx['nombre'] . '"');
+        header('Content-Length: ' . strlen($docx['contenido']));
+        echo $docx['contenido'];
+        exit;
     }
 
     public function anular(int $idContrato, string $motivo): array

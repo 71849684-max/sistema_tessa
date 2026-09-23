@@ -41,12 +41,14 @@ test('la matriz de permisos muestra solo acciones aplicables a cada vista', () =
     assert.deepEqual(accionesDisponibles('dashboard'), ['ver']);
     assert.deepEqual(accionesDisponibles('contratos'), ['ver', 'crear', 'anular']);
     assert.deepEqual(accionesDisponibles('usuarios'), ['ver', 'crear', 'editar', 'administrar']);
+    assert.deepEqual(accionesDisponibles('configuracion'), ['ver', 'editar']);
 });
 
 test('las vistas de permisos se agrupan como el menú de navegación', () => {
     const { areaModulo, ordenarPermisos } = require('../resources/js/permisos.js');
     assert.equal(areaModulo('contratos'), 'Ventas');
     assert.equal(areaModulo('cargos'), 'Administración');
+    assert.equal(areaModulo('configuracion'), 'Administración');
     assert.deepEqual(ordenarPermisos([{ modulo: 'cargos' }, { modulo: 'clientes' }, { modulo: 'dashboard' }]).map(row => row.modulo), ['dashboard', 'clientes', 'cargos']);
 });
 

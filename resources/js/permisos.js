@@ -10,6 +10,7 @@ const ACCIONES_POR_MODULO = {
     cargos: ['ver', 'crear', 'editar'],
     usuarios: ['ver', 'crear', 'editar', 'administrar'],
     auditoria: ['ver'],
+    configuracion: ['ver', 'editar'],
 };
 function accionesDisponibles(modulo) { return ACCIONES_POR_MODULO[modulo] || ['ver']; }
 function areaModulo(modulo) { return ['dashboard', 'clientes', 'servicios', 'contratos', 'cobranzas', 'egresos'].includes(modulo) ? 'Ventas' : 'Administración'; }

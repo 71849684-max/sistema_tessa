@@ -1,4 +1,27 @@
 <?php
 declare(strict_types=1);
-require_once __DIR__.'/../core/ControllerHelper.php'; require_once __DIR__.'/../../capalogica/seguridad/PermisoService.php'; require_once __DIR__.'/../../capalogica/ventas/ContratoService.php';
-$in=ControllerHelper::input(); $a=$in['accion'] ?? 'listar'; if(!in_array($a,['listar','detalle','catalogos','clientes_buscar'],true)) ControllerHelper::exigirPostCsrf(); PermisoService::requiere('contratos',in_array($a,['listar','detalle','catalogos','clientes_buscar'],true)?'ver':($a==='anular'?'anular':'crear')); $s=new ContratoService(); $r=match($a){'listar'=>$s->listar(),'catalogos'=>$s->catalogos(),'clientes_buscar'=>$s->buscarClientes((string)($in['buscar']??'')),'detalle'=>$s->detalle((int)($in['id_contrato']??0)),'anular'=>$s->anular((int)($in['id_contrato']??0),(string)($in['motivo']??'')),default=>$s->guardar($in)}; ControllerHelper::responder($r,$r['exito']?200:422);
+require_once __DIR__ . '/../core/ControllerHelper.php';
+require_once __DIR__ . '/../../capalogica/seguridad/PermisoService.php';
+require_once __DIR__ . '/../../capalogica/ventas/ContratoService.php';
+require_once __DIR__ . '/../../capalogica/core/RespuestaHelper.php';
+
+$in = ControllerHelper::input();
+$accion = (string)($in['accion'] ?? 'listar');
+$lecturas = ['listar', 'detalle', 'catalogos', 'clientes_buscar', 'docx'];
+if (!in_array($accion, $lecturas, true)) ControllerHelper::exigirPostCsrf();
+$permiso = in_array($accion, $lecturas, true) ? 'ver' : ($accion === 'anular' ? 'anular' : ((int)($in['id_contrato'] ?? 0) > 0 ? 'editar' : 'crear'));
+PermisoService::requiere('contratos', $permiso);
+
+$service = new ContratoService();
+if ($accion === 'docx') $service->descargarDocx((int)($in['id_contrato'] ?? $_GET['id_contrato'] ?? 0));
+
+$respuesta = match ($accion) {
+    'listar' => $service->listar(),
+    'catalogos' => $service->catalogos(),
+    'clientes_buscar' => $service->buscarClientes((string)($in['buscar'] ?? '')),
+    'detalle' => $service->detalle((int)($in['id_contrato'] ?? 0)),
+    'anular' => $service->anular((int)($in['id_contrato'] ?? 0), (string)($in['motivo'] ?? '')),
+    'guardar' => ((int)($in['id_contrato'] ?? 0) > 0 ? $service->actualizar($in) : $service->guardar($in)),
+    default => RespuestaHelper::error('Acción no reconocida.'),
+};
+ControllerHelper::responder($respuesta, $respuesta['exito'] ? 200 : 422);

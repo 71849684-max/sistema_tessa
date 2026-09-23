@@ -6,10 +6,19 @@ require_once __DIR__ . '/../seguridad/AuditoriaService.php';
 
 final class CobranzaService extends BaseService
 {
-    public function contratos(): array
+    public function contratos(string $buscar = ''): array
     {
-        try { return $this->ok('Contratos obtenidos.', $this->call('CALL sp_contrato_listar()')); }
+        try {
+            $filas = trim($buscar) === '' ? $this->call('CALL sp_contrato_listar()') : $this->call('CALL sp_contrato_buscar_activos(?)', 's', [trim($buscar)]);
+            return $this->ok('Contratos obtenidos.', $filas);
+        }
         catch (Throwable $e) { error_log('CobranzaService contratos: ' . $e->getMessage()); return $this->error('No se pudieron consultar contratos.'); }
+    }
+
+    public function voucherDatos(int $cobranza, int $hito): array
+    {
+        try { return $this->fila($this->call('CALL sp_cobranza_voucher_datos(?,?)', 'ii', [$cobranza, $hito])); }
+        catch (Throwable $e) { error_log('CobranzaService voucher: ' . $e->getMessage()); return []; }
     }
 
     public function listar(array $filtros = []): array
@@ -24,16 +33,34 @@ final class CobranzaService extends BaseService
         catch (Throwable $e) { return $this->error('No se pudieron obtener cuotas.'); }
     }
 
+    public function participantesPago(int $contrato): array
+    {
+        if ($contrato < 1) return $this->error('Contrato inválido.');
+        try {
+            $fila = $this->fila($this->call('CALL sp_contrato_participantes_pago(?)', 'i', [$contrato]));
+            if (is_string($fila['participantes'] ?? null)) {
+                $participantes = json_decode($fila['participantes'], true);
+                $fila['participantes'] = is_array($participantes) ? $participantes : [];
+            }
+            return $this->ok('Participantes obtenidos.', $fila);
+        }
+        catch (Throwable $e) { return $this->error('No se pudieron obtener los participantes.'); }
+    }
+
     public function registrar(array $datos, ?array $voucher = null): array
     {
         $contrato = (int)($datos['id_contrato'] ?? 0);
         $detalles = is_string($datos['detalles'] ?? null) ? json_decode((string)$datos['detalles'], true) : ($datos['detalles'] ?? []);
         if ($contrato < 1 || !is_array($detalles) || $detalles === []) return $this->error('Pago incompleto.', ['detalles' => 'Seleccione cuotas y montos.']);
         foreach ($detalles as $detalle) if ((int)($detalle['id_hito'] ?? 0) < 1 || (float)($detalle['monto'] ?? 0) <= 0) return $this->error('Detalle de pago inválido.', ['detalles' => 'Monto positivo requerido.']);
+        $medio = strtoupper(trim((string)($datos['medio_pago'] ?? 'EFECTIVO')));
+        if (!in_array($medio, ['EFECTIVO', 'TRANSFERENCIA', 'YAPE', 'PLIN', 'TARJETA'], true)) return $this->error('Medio de pago inválido.');
+        if ($medio !== 'EFECTIVO' && (trim((string)($datos['numero_operacion'] ?? '')) === '' || $voucher === null)) return $this->error('Falta comprobante.', ['voucher' => 'Ingrese operación y voucher para este medio.']);
+        if ($medio === 'EFECTIVO') $voucher = null;
         try {
-            $fila = $this->fila($this->call('CALL sp_cobranza_registrar(?,?,?,?,?,?,?,?,?,?)', 'iissssssis', [
+            $fila = $this->fila($this->call('CALL sp_cobranza_registrar(?,?,?,?,?,?,?,?,?,?,?)', 'iisssisssis', [
                 $contrato,(int)($_SESSION['personal_id'] ?? 0),(string)($datos['fecha'] ?? date('Y-m-d H:i:s')),
-                trim((string)($datos['medio_pago'] ?? 'TRANSFERENCIA')),trim((string)($datos['numero_operacion'] ?? '')),
+                $medio,trim((string)($datos['numero_operacion'] ?? '')),(int)($datos['id_cliente_pagador'] ?? 0),
                 json_encode(array_values($detalles), JSON_UNESCAPED_UNICODE),
                 (string)($voucher['nombre_interno'] ?? ''), (string)($voucher['mime'] ?? ''),
                 (int)($voucher['tamano'] ?? 0), (string)($voucher['hash'] ?? '')

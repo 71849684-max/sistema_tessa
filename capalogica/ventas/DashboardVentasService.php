@@ -22,12 +22,14 @@ final class DashboardVentasService extends BaseService
             return $resumen;
         }
         try {
+            $pendientes = $this->call('CALL sp_dashboard_ventas_pendientes(?,?)', 'ss', [$desde, $hasta]);
             return $this->ok('Dashboard de ventas obtenido.', [
                 'resumen' => $resumen['datos'],
                 'evolucion' => $this->call('CALL sp_dashboard_ventas_evolucion(?,?)', 'ss', [$desde, $hasta]),
                 'embudo' => $this->call('CALL sp_dashboard_ventas_embudo(?,?)', 'ss', [$desde, $hasta]),
                 'servicios' => $this->call('CALL sp_dashboard_ventas_servicios(?,?)', 'ss', [$desde, $hasta]),
-                'pendientes' => $this->call('CALL sp_dashboard_ventas_pendientes(?,?)', 'ss', [$desde, $hasta]),
+                'pendientes' => $pendientes,
+                'alertas' => $pendientes,
             ]);
         } catch (Throwable $e) {
             error_log('DashboardVentasService::datos ' . $e->getMessage());

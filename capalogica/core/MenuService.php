@@ -27,6 +27,7 @@ final class MenuService
                 ['codigo' => 'cargos', 'etiqueta' => 'Cargos', 'ruta' => 'capacliente/rrhh/cargos.php'],
                 ['codigo' => 'usuarios', 'etiqueta' => 'Usuarios y permisos', 'ruta' => 'capacliente/rrhh/usuarios.php'],
                 ['codigo' => 'auditoria', 'etiqueta' => 'Auditoría', 'ruta' => 'capacliente/rrhh/auditoria.php'],
+                ['codigo' => 'configuracion', 'etiqueta' => 'Configuración', 'ruta' => 'capacliente/rrhh/configuracion.php'],
             ],
         ],
     ];
